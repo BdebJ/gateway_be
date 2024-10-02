@@ -8,13 +8,18 @@
       "skipFiles": [
         "<node_internals>/**"
       ],
-      "runtimeExecutable": "ts-node",
-      "program": "${workspaceFolder}/src/server.ts",
-      "sourceMaps": true,
+      "runtimeExecutable": "node",
+      "args": [
+        "--watch",
+        "-r",
+        "ts-node/register",
+        "${workspaceFolder}/src/server.ts"
+      ],
       "envFile": "${workspaceFolder}/.env",
       "env": {
         "NODE_ENV": "development"
       },
+      "sourceMaps": true
     }
   ]
 }

@@ -9,7 +9,7 @@ export const sendSuccessResponse = <T>(res: Response, message: string, data: T, 
   res.status(statusCode).json(response);
 };
 
-export const sendErrorResponse = (res: Response, message: string, statusCode: number = 400): void => {
+export const sendErrorResponse = (res: Response, message: string, statusCode: number = 500): void => {
   const response: ErrorResponse = {
     message
   };

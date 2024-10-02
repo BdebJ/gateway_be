@@ -7,7 +7,7 @@ import {
   pingController,
   reverseStringController,
   statusCodeController
-} from '../controllers/testController';
+} from '../controllers/standardController';
 
 const router: Router = Router();
 
@@ -17,9 +17,7 @@ router.get('/echo-request', echoRequestController);
 router.get('/health', healthController);
 router.get('/status/:code', statusCodeController);
 router.get('/delay/:ms', delayController);
-// router.get('/cache');
 
 router.post('/reverse-string', reverseStringController);
-// router.post('/upload');
 
 export default router;

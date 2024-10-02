@@ -1,7 +1,7 @@
 import { RequestHandler } from 'express';
-import { fibonacciService, reverseStringService } from '../services/testService';
-import { FibonacciParams, ReverseStringBody } from '../types/testTypes';
-import { sendSuccessResponse } from '../utils/responseHelper';
+import { delayService, fibonacciService, reverseStringService } from '../services/standardService';
+import { DelayParams, FibonacciParams, ReverseStringBody } from '../types/standardTypes';
+import { sendErrorResponse, sendSuccessResponse } from '../utils/responseHelper';
 
 export const pingController: RequestHandler = (_req, res) => {
   sendSuccessResponse(res, 'pong', null);
@@ -29,20 +29,31 @@ export const statusCodeController: RequestHandler = (req, res) => {
 
 // Set hard limits on validators for this
 // Ensure multiple of these in parallel dont slow down server
-export const delayController: RequestHandler = (req, res) => {
+export const delayController: RequestHandler<DelayParams> = async (req, res) => {
   const delay = Number(req.params.ms);
-  setTimeout(() => {
-    sendSuccessResponse(res, `Delayed response by ${delay}ms`, null);
-  }, delay);
+  await delayService(delay);
+  sendSuccessResponse(res, `Delayed response by ${delay}ms`, null);
 };
 
 export const reverseStringController: RequestHandler<unknown, unknown, ReverseStringBody> = async (req, res) => {
-  try {
-    const { input: inputStr } = req.body;
-    const reversedString: string = reverseStringService(inputStr);
-    res.json({ reversed: reversedString });
-  } catch (err) {
-    res.status(500).json({ error: 'An error occurred' });
-    throw err;
-  }
+  const { input: inputStr } = req.body;
+  const reversedString = reverseStringService(inputStr);
+  sendSuccessResponse(res, 'String reversed', reversedString);
+};
+
+export const echoUploadController: RequestHandler = (req, res) => {
+  const chunks: Buffer[] = [];
+  req.on('data', (chunk) => {
+    chunks.push(Buffer.from(chunk));
+  });
+  req.on('end', () => {
+    const data = Buffer.concat(chunks);
+    res.setHeader('Content-Type', req.headers['content-type'] || 'application/octet-stream');
+    res.attachment();
+    res.send(data);
+  });
+
+  req.on('error', (_err) => {
+    sendErrorResponse(res, 'Error recieving data');
+  });
 };
