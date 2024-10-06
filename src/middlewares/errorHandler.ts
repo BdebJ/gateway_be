@@ -1,18 +1,15 @@
 import { ErrorRequestHandler } from 'express';
-import { BadRequestError, ConflictError } from '../types/errorTypes';
-import { sendErrorResponse } from '../utils/responseHelper';
+import { BadRequestError, ConflictError, UnauthorizedError } from '../types/errorTypes';
 
 export const errorHandler: ErrorRequestHandler = (err, _req, res, _next) => {
   console.error(err);
 
-  if (err instanceof BadRequestError) {
-    return sendErrorResponse(res, err.message, err.statusCode);
+  const statusCode = err.statusCode || 500;
+  const message = err.message || 'Something went wrong!';
+
+  if (err instanceof BadRequestError || err instanceof ConflictError || err instanceof UnauthorizedError) {
+    res.status(statusCode).json({ message }); return;
   }
 
-  if (err instanceof ConflictError) {
-    return sendErrorResponse(res, err.message, err.statusCode);
-  }
-
-  // Default error fallback
-  return sendErrorResponse(res, 'Something went wrong!');
+  res.status(500).json({ message });
 };

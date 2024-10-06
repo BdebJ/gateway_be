@@ -1,0 +1,10 @@
+export type TokenPair = { accessToken: string, refreshToken: string; };
+export type AuthBody = { username: string; password: string; };
+export type LogoutBody = { username: string; refreshToken: string; };
+export type RefreshBody = { refreshToken: string; };
+export type AuthTestRes = { username: string | undefined; };
+export type RegisterServiceFn = (username: string, password: string) => Promise<void>;
+export type LoginServiceFn = (username: string, password: string) => Promise<TokenPair>;
+export type RefreshTokenServiceFn = (refreshToken: string) => Promise<TokenPair>;
+export type VerifyTokenServiceFn = (token: string) => Promise<string | undefined>;
+export type LogoutServiceFn = (username: string, refreshToken: string) => Promise<void>;

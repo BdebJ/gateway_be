@@ -13,7 +13,7 @@ const router: Router = Router();
 
 router.get('/ping', pingController);
 router.get('/fibonacci/:limit', fibonacciController);
-router.get('/echo-request', echoRequestController);
+router.get('/echo-request/:param*?', echoRequestController);
 router.get('/health', healthController);
 router.get('/status/:code', statusCodeController);
 router.get('/delay/:ms', delayController);

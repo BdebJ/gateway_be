@@ -1,4 +1,4 @@
-import { DelayServiceFn, FibonacciServiceFn, ReverseStringServiceFn } from "../types/standardTypes";
+import { DelayServiceFn, FibonacciServiceFn, ReverseStringServiceFn } from '../types/standardTypes';
 
 export const fibonacciService: FibonacciServiceFn = (count) => {
   const fib: string[] = ['0', '1'];
