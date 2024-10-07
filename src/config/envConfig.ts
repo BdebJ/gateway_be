@@ -12,3 +12,5 @@ export const ACCESS_TOKEN_SECRET = env('ACCESS_TOKEN_SECRET');
 export const ACCESS_TOKEN_EXPIRY = env('ACCESS_TOKEN_EXPIRY');
 export const REFRESH_TOKEN_SECRET = env('REFRESH_TOKEN_SECRET');
 export const REFRESH_TOKEN_EXPIRY = env('REFRESH_TOKEN_EXPIRY');
+export const REDIS_HOST = env('REDIS_HOST');
+export const REDIS_PORT = env('REDIS_PORT');

@@ -6,12 +6,13 @@ import { errorHandler } from './middlewares/errorHandler';
 import authRoutes from './routes/authRoutes';
 import standardRoutes from './routes/standardRoutes';
 import unparsedRoutes from './routes/unparsedRoutes';
+import { logStream } from './utils/logger';
 
 const app: Application = express();
 
 app.use(cors());
 app.use(helmet());
-app.use(morgan('dev'));
+app.use(morgan('tiny', { stream: logStream }));
 
 app.use('/api', unparsedRoutes);
 

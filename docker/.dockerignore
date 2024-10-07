@@ -1,0 +1,27 @@
+# Ignore node_modules
+node_modules
+npm-debug.log
+
+# Ignore logs
+logs
+*.log
+
+# Ignore build artifacts
+dist
+coverage
+
+# Ignore local configuration files
+.eslintcache
+.idea
+.vscode
+*.local
+
+# Ignore temporary files and folders
+*.tmp
+*.temp
+.DS_Store
+Thumbs.db
+
+# Ignore any other files not needed for production
+docker-compose.yml
+README.md

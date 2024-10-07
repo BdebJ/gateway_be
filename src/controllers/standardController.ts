@@ -20,7 +20,6 @@ export const echoRequestController: RequestHandler<unknown, SuccessResponse> = (
     message: 'Request details echoed',
     data: { headers: req.headers, params: req.params, query: req.query, body: req.body }
   });
-
 };
 
 export const healthController: RequestHandler<unknown, SuccessResponse> = (_req, res) => {
