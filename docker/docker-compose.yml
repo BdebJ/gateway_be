@@ -8,11 +8,14 @@ services:
     environment:
       - REDIS_HOST=redis
     ports:
-      - "6969:6969"
+      - "1301-1305:6969"
     depends_on:
       - redis
     networks:
       - backend
+    deploy:
+      mode: replicated
+      replicas: 5
 
   redis:
     image: redis:7.4-alpine
